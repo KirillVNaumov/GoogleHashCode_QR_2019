@@ -10,18 +10,28 @@
 #                                                                              #
 # **************************************************************************** #
 
-INCLUDES = -I includes
+INCLUDES_EXEC = -I executable/includes
+INCLUDES_CHECKER = -I checker/includes
 
-SRCS = 	srcs/main.cpp \
-		srcs/reading_input/reading_input.cpp \
-		srcs/reading_input/read_images.cpp \
-		srcs/reading_input/read_number_of_images.cpp \
-		srcs/utils/struct_operations/t_image.cpp \
-		srcs/utils/struct_operations/t_slide.cpp 
+SRCS_EXEC = executable/srcs/main.cpp \
+			executable/srcs/separate_vertical.cpp \
+			executable/srcs/create_possible_slides/create_possible_slides.cpp \
+			executable/srcs/printing/print_input.cpp \
+			executable/srcs/printing/print_horizontal.cpp \
+			executable/srcs/printing/print_vertical.cpp \
+			executable/srcs/reading_input/reading_input.cpp \
+			executable/srcs/reading_input/read_images.cpp \
+			executable/srcs/reading_input/read_number_of_images.cpp \
+			executable/srcs/utils/struct_operations/t_image.cpp \
+			executable/srcs/utils/struct_operations/t_slide.cpp 
 
-OBJ		=	$(SRCS:.cpp=.o)
+SRCS_CHECKER = checker/srcs/main.cpp
 
-EXEC = GHash
+OBJ_EXEC	=	$(SRCS_EXEC:.cpp=.o)
+OBJ_CHECKER	=	$(SRCS_CHECKER:.cpp=.o)
+
+EXEC = exe
+CHECKER = check
 
 RESET = \033[0m
 RED = \033[0;31m
@@ -33,19 +43,28 @@ BLUE_EXTRA = \033[1;36m
 
 %.o:%.cpp
 			@echo "$(GREEN) - Creating $(GREEN_EXTRA)$<...$(RESET)"
-			@clang++ -c $< -o $@ $(INCLUDES) -g
+			@clang++ -c $< -o $@ $(INCLUDES_EXEC) $(INCLUDES_CHECKER) -g
 
-all: $(EXEC)
+all: $(EXEC) $(CHECKER)
 
-$(EXEC): $(OBJ)
+$(EXEC): $(OBJ_EXEC)
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC)$(RESET)"
-	@clang++ -o $(EXEC) $(OBJ) $(INCLUDE) -g
+	@clang++ -o $(EXEC) $(OBJ_EXEC) $(INCLUDES_EXEC) -g
 	@echo "$(BLUE_EXTRA)$(EXEC)$(BLUE): Complete$(RESET)"
 
+$(CHECKER): $(OBJ_CHECKER)
+	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(CHECKER)$(RESET)"
+	@clang++ -o $(CHECKER) $(OBJ_CHECKER) $(INCLUDES_CHECKER) -g
+	@echo "$(BLUE_EXTRA)$(CHECKER)$(BLUE): Complete$(RESET)"
+
 clean:
-	@if [ -a "srcs/main.o" ]; then \
+	@if [ -a "executable/srcs/main.o" ]; then \
 	echo "$(RED)Deleting objects for $(RED_EXTRA)$(EXEC)$(RESET)"; \
-	/bin/rm -rf $(OBJ); \
+	/bin/rm -rf $(OBJ_EXEC); \
+	fi
+	@if [ -a "checker/srcs/main.o" ]; then \
+	echo "$(RED)Deleting objects for $(RED_EXTRA)$(CHECKER)$(RESET)"; \
+	/bin/rm -rf $(OBJ_CHECKER); \
 	fi
 	@echo "$(BLUE_EXTRA)clean$(BLUE): Complete$(RESET)"
 
@@ -53,6 +72,10 @@ fclean: clean
 	@if [ -a "$(EXEC)" ]; then \
 	echo "$(RED)Deleting executable $(RED_EXTRA)$(EXEC)$(RESET)"; \
 	/bin/rm -f $(EXEC); \
+	fi
+	@if [ -a "$(CHECKER)" ]; then \
+	echo "$(RED)Deleting executable $(RED_EXTRA)$(CHECKER)$(RESET)"; \
+	/bin/rm -f $(CHECKER); \
 	fi
 	@echo "$(BLUE_EXTRA)fclean$(BLUE): Complete$(RESET)"
 
