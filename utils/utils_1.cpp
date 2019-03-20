@@ -26,3 +26,29 @@ void        error(std::string reason) {
     std::cout << CRED << "Error: " << reason << std::endl;
     exit(0);
 }
+
+std::list<char *>       arr_to_list(char **arr)
+{
+    int     i;
+    std::list<char *> list;
+
+    i = 0;
+    while (arr[i])
+        list.push_back(arr[i++]);
+    return (list);
+}
+
+char       **list_to_arr(std::list<char *> list)
+{
+    int     i;
+    int     length;
+    char    **arr;
+
+    i = 0;
+    length = list.size();
+    arr = (char **)malloc(sizeof(char *) * (length + 1));
+    for (std::list<char *>::iterator it=list.begin(); it!=list.end(); ++it)
+        arr[i++] = *it;
+    arr[i] = NULL;
+    return (arr);
+}

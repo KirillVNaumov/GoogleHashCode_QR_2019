@@ -3,6 +3,13 @@
 
 #include "utils.hpp"
 
+void        assess_output(t_info *info);
+void        determine_tags(t_info *info);
+
+/*
+    Check_output
+*/
+
 void        check_output_for_repetition(t_info *info);
 void        check_verticals(t_info *info);
 

@@ -10,6 +10,8 @@ void        recording_tags(t_info *info, int index, char *str) {
     i = 0;
     while (i < info->input[index]->number_of_tags)
     {
+        if (*str == '\0')
+            error("The listed number for tags doesn't match the actual");
         j = 0;
         while (str[j] != ' ' && str[j] != '\0')
             ++j;
@@ -24,6 +26,8 @@ void        recording_tags(t_info *info, int index, char *str) {
         info->input[index]->tags[i++] += '\0';
     }
     info->input[index]->tags[i] = NULL;
+    if (*str != '\0')
+        error("The listed number for tags doesn't match the actual");
 }
 
 int         read_images(t_info *info, std::string line, int index) {

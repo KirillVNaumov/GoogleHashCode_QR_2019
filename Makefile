@@ -15,7 +15,9 @@ INCLUDES_CHECKER = -I checker/includes
 INCLUDES_UTILS = -I utils
 
 UTILS = 	utils/utils_1.cpp \
+			utils/utils_bool.cpp \
 			utils/printing/print_input.cpp \
+			utils/printing/print_output.cpp \
 			utils/printing/print_horizontal.cpp \
 			utils/printing/print_vertical.cpp \
 			utils/struct_operations/t_image.cpp \
@@ -30,8 +32,10 @@ SRCS_EXEC = executable/srcs/main.cpp \
 
 SRCS_CHECKER = \
 			checker/srcs/main.cpp \
-			checker/srcs/check_verticals.cpp \
-			checker/srcs/check_output_for_repetition.cpp \
+			checker/srcs/assess_output.cpp \
+			checker/srcs/determine_tags.cpp \
+			checker/srcs/check_output/check_verticals.cpp \
+			checker/srcs/check_output/check_output_for_repetition.cpp \
 			checker/srcs/reading_file/reading_file.cpp \
 			checker/srcs/reading_file/read_images.cpp \
 			checker/srcs/reading_file/read_number_of_images.cpp \
