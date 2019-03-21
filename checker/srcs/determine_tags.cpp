@@ -10,8 +10,10 @@ void            determine_tags(t_info *info)
     {
         if (info->input[info->output[i]->index_1]->position == 0)
         {
+            list = arr_to_list(info->input[info->output[i]->index_1]->tags);
+            list.sort(compare_nocase);
             info->output[i]->number_of_tags = info->input[info->output[i]->index_1]->number_of_tags;
-            info->output[i]->tags = info->input[info->output[i]->index_1]->tags;
+            info->output[i]->tags = list_to_arr(list);;
         }
         else
         {

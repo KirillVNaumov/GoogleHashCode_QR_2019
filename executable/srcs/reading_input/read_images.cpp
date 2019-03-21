@@ -22,7 +22,8 @@ void        recording_tags(t_info *info, int index, char *str) {
             info->input[index]->tags[i][j++] = *str;
             ++str;
         }
-        ++str;
+        if (*str != '\0')
+            ++str;
         info->input[index]->tags[i++] += '\0';
     }
     info->input[index]->tags[i] = NULL;

@@ -15,8 +15,6 @@ int         main(int argc, char **argv)
     check_output_for_repetition(info);
     check_verticals(info);
     determine_tags(info);
-    print_input(info);
-    print_output(info);
-    // assess_output(info);
+    assess_output(info);
     return (0);
 }

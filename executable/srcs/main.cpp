@@ -8,7 +8,5 @@ int         main()
     reading_input(info);
     separate_vertical(info);
     // create_possible_slides(info);
-    print_vertical(info);
-    print_horizontal(info);
     return (0);
 }
