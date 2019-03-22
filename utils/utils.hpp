@@ -28,11 +28,17 @@ typedef struct      s_slide
 typedef struct      s_info
 {
     int             number_of_images;
+    int             number_of_vertical_images;
+    int             number_of_horizontal_images;
     int             number_of_slides;
+    int             number_of_horizontal_slides;
+    int             number_of_vertical_slides;
     t_image         **input;
     t_image         **horizontal_images;
     t_image         **vertical_images;
     t_slide         **output;
+    t_slide         **horizontal_slides;
+    t_slide         **vertical_slides;
 }                   t_info;
 
 /*
@@ -49,8 +55,8 @@ char                **list_to_arr(std::list<char *> list);
     Utils_bool
 */
 
-bool compare_nocase (const std::string& first, const std::string& second);
-bool same_word (const std::string& first, const std::string& second);
+bool                compare_nocase (const std::string& first, const std::string& second);
+bool                same_word (const std::string& first, const std::string& second);
 
 /*
     Struct_operations
@@ -63,8 +69,10 @@ void                initialize_slides(t_info *info);
     Printing
 */
 
-void                print_horizontal(t_info *info);
-void                print_vertical(t_info *info);
+void                print_horizontal_images(t_info *info);
+void                print_vertical_images(t_info *info);
+void                print_horizontal_slides(t_info *info);
+void                print_vertical_slides(t_info *info);
 void                print_output(t_info *info);
 void                print_input(t_info *info);
 

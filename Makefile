@@ -18,14 +18,20 @@ UTILS = 	utils/utils_1.cpp \
 			utils/utils_bool.cpp \
 			utils/printing/print_input.cpp \
 			utils/printing/print_output.cpp \
-			utils/printing/print_horizontal.cpp \
-			utils/printing/print_vertical.cpp \
+			utils/printing/print_horizontal_images.cpp \
+			utils/printing/print_vertical_images.cpp \
+			utils/printing/print_horizontal_slides.cpp \
+			utils/printing/print_vertical_slides.cpp \
 			utils/struct_operations/t_image.cpp \
 			utils/struct_operations/t_slide.cpp 
 
 SRCS_EXEC = executable/srcs/main.cpp \
-			executable/srcs/separate_vertical.cpp \
+			executable/srcs/separate_vertical_and_horizontal/separate_vertical_and_horizontal.cpp \
+			executable/srcs/separate_vertical_and_horizontal/initialize_horizontal_array.cpp \
+			executable/srcs/separate_vertical_and_horizontal/initialize_vertical_array.cpp \
 			executable/srcs/create_possible_slides/create_possible_slides.cpp \
+			executable/srcs/create_possible_slides/create_vertical_slides.cpp \
+			executable/srcs/create_possible_slides/create_horizontal_slides.cpp \
 			executable/srcs/reading_input/reading_input.cpp \
 			executable/srcs/reading_input/read_images.cpp \
 			executable/srcs/reading_input/read_number_of_images.cpp 
