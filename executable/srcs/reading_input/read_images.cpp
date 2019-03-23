@@ -6,7 +6,7 @@ void        recording_tags(t_info *info, int index, char *str) {
     int     i;
     int     j;
 
-    info->input[index]->tags = (char **)malloc(sizeof(char *) * (info->input[index]->number_of_tags + 1));
+    info->input[index]->tags = (long long *)malloc(sizeof(long long) * info->input[index]->number_of_tags);
     i = 0;
     while (i < info->input[index]->number_of_tags)
     {
@@ -15,18 +15,19 @@ void        recording_tags(t_info *info, int index, char *str) {
         j = 0;
         while (str[j] != ' ' && str[j] != '\0')
             ++j;
-        info->input[index]->tags[i] = (char *)malloc(sizeof(char) * (j + 1));
+        tmp = (char *)malloc(sizeof(char) * (j + 1));
         j = 0;
         while (*str != ' ' && *str != '\0')
         {
-            info->input[index]->tags[i][j++] = *str;
+            tmp[j] = *str;
             ++str;
+            ++j;
         }
+        tmp[j] = '\0';
+        info->input[index]->tags[i++] = from_string_to_num(tmp);
         if (*str != '\0')
             ++str;
-        info->input[index]->tags[i++] += '\0';
     }
-    info->input[index]->tags[i] = NULL;
     if (*str != '\0')
         error("The listed number for tags doesn't match the actual");
 }

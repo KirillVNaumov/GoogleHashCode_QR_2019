@@ -16,6 +16,7 @@ INCLUDES_UTILS = -I utils
 
 UTILS = 	utils/utils_1.cpp \
 			utils/utils_bool.cpp \
+			utils/from_string_to_num.cpp \
 			utils/printing/print_input.cpp \
 			utils/printing/print_output.cpp \
 			utils/printing/print_horizontal_images.cpp \

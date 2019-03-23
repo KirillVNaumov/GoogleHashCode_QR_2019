@@ -14,7 +14,7 @@ typedef struct      s_image
     int             index;
     int             position; //1 - vertical 0 - horizontal
     int             number_of_tags;
-    char            **tags;
+    long long       *tags;
 }                   t_image;
 
 typedef struct      s_slide
@@ -22,7 +22,7 @@ typedef struct      s_slide
     int             index_1;
     int             index_2;
     int             number_of_tags;
-    char            **tags;
+    long long       *tags;
 }                   t_slide;
 
 typedef struct      s_info
@@ -41,22 +41,31 @@ typedef struct      s_info
     t_slide         **vertical_slides;
 }                   t_info;
 
+long long           from_string_to_num(char *str);
+
 /*
     Utils_1
 */
 
-int                 check_for_number(std::string line);
-int                 check_for_integer(int n);
-void                error(std::string reason);
-std::list<char *>   arr_to_list(char **arr);
-char                **list_to_arr(std::list<char *> list);
+int                     check_for_number(std::string line);
+int                     check_for_integer(int n);
+void                    error(std::string reason);
+std::list<long long>    arr_to_list(long long *arr, int length);
+long long               *list_to_arr(std::list<long long> list);
+
+/*
+    Utils_2
+*/
+
+t_slide             **sort_slides(t_slide **arr);
+t_image             **sort_images(t_image **arr);
 
 /*
     Utils_bool
 */
 
-bool                compare_nocase (const std::string& first, const std::string& second);
-bool                same_word (const std::string& first, const std::string& second);
+bool                compare_nocase (long long first, long long second);
+bool                same_word (long long first, long long second);
 
 /*
     Struct_operations

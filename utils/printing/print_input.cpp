@@ -16,7 +16,7 @@ void        print_input(t_info *info)
         else
             std::cout << "Horizontal" << std::endl;
         std::cout << "Number of Tags: " << info->input[i]->number_of_tags << std::endl;
-        while (info->input[i]->tags[j])
+        while (j < info->number_of_images)
             std::cout << " - " << info->input[i]->tags[j++] << std::endl;
         std::cout << std::endl;
         ++i;

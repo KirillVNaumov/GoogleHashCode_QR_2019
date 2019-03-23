@@ -27,28 +27,27 @@ void        error(std::string reason) {
     exit(0);
 }
 
-std::list<char *>       arr_to_list(char **arr)
+std::list<long long>       arr_to_list(long long *arr, int length)
 {
     int     i;
-    std::list<char *> list;
+    std::list<long long> list;
 
     i = 0;
-    while (arr[i])
+    while (i < length)
         list.push_back(arr[i++]);
     return (list);
 }
 
-char       **list_to_arr(std::list<char *> list)
+long long                   *list_to_arr(std::list<long long> list)
 {
     int     i;
     int     length;
-    char    **arr;
+    long long *arr;
 
     i = 0;
     length = list.size();
-    arr = (char **)malloc(sizeof(char *) * (length + 1));
-    for (std::list<char *>::iterator it=list.begin(); it!=list.end(); ++it)
+    arr = (long long *)malloc(sizeof(long long) * length);
+    for (std::list<long long>::iterator it=list.begin(); it!=list.end(); ++it)
         arr[i++] = *it;
-    arr[i] = NULL;
     return (arr);
 }

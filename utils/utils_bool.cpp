@@ -1,18 +1,11 @@
 #include "utils.hpp"
 
-bool compare_nocase (const std::string& first, const std::string& second)
+bool compare_nocase (long long first, long long second)
 {
-  unsigned int i=0;
-  while ( (i<first.length()) && (i<second.length()) )
-  {
-    if (tolower(first[i])<tolower(second[i])) return true;
-    else if (tolower(first[i])>tolower(second[i])) return false;
-    ++i;
-  }
-  return ( first.length() < second.length() );
+  return (first < second ? true : false);
 }
 
-bool same_word (const std::string& first, const std::string& second)
+bool same_word (long long first, long long second)
 {
-    return (first.compare(second) == 0 ? true : false);
+    return (first == second ? true : false);
 }

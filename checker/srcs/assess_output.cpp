@@ -2,22 +2,21 @@
 
 int             find_common_tags(t_slide *first, t_slide *second)
 {
-    std::list<char *>   list_1 = arr_to_list(first->tags);
-    std::list<char *>   list_2 = arr_to_list(second->tags);    
-    std::list<char *>::const_iterator i1 = list_1.begin();
-    std::list<char *>::const_iterator i2 = list_2.begin();
+    std::list<long long>   list_1 = arr_to_list(first->tags, first->number_of_tags);
+    std::list<long long>   list_2 = arr_to_list(second->tags, second->number_of_tags);    
+    std::list<long long>::const_iterator i1 = list_1.begin();
+    std::list<long long>::const_iterator i2 = list_2.begin();
     int     score;
 
     score = 0;
     while(i1 != list_1.end() && i2 != list_2.end()){
-        int eq = strcmp(*i1, *i2);
-        if(eq == 0)
+        if(*i1 == *i2)
         {
             ++score;
             ++i1;
             ++i2;
         }
-        else if (eq > 0)
+        else if (*i1 > 0)
             ++i2;
         else
             ++i1;
