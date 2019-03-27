@@ -15,7 +15,7 @@ void        print_output(t_info *info)
             std::cout << " " << info->output[i]->index_2;
         std::cout << std::endl;
         std::cout << "Number of Tags: " << info->output[i]->number_of_tags << std::endl;
-        while (j < info->number_of_slides)
+        while (j < info->output[i]->number_of_tags)
             std::cout << " - " << info->output[i]->tags[j++] << std::endl;
         std::cout << std::endl;
         ++i;

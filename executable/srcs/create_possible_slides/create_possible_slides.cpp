@@ -2,8 +2,8 @@
 
 void        create_possible_slides(t_info *info)
 {
-    // sort_images(info->horizontal_images);
     create_horizontal_slides(info);
-    // sort_images(info->vertical_images);
+    info->horizontal_slides = sort_slides(info->horizontal_slides);
     create_vertical_slides(info);
+    info->vertical_slides = sort_slides(info->vertical_slides);
 }

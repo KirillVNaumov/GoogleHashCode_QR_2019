@@ -4,6 +4,12 @@
 #include "utils.hpp"
 
 /*
+    Create_output
+*/
+
+void        create_output(t_info *info);
+
+/*
     Create_possible_slides
 */
 
@@ -25,6 +31,7 @@ int         read_images(t_info *info, std::string line, int index);
 void        separate_vertical_and_horizontal(t_info *info);
 void        initialize_vertical_array(t_info *info, int length);
 void        initialize_horizontal_array(t_info *info, int length);
+
 /*
     Main
 */

@@ -13,7 +13,7 @@ void        print_vertical_slides(t_info *info)
         std::cout << "Slide: " << info->vertical_slides[i]->index_1 << " " << info->vertical_slides[i]->index_2;
         std::cout << std::endl;
         std::cout << "Number of Tags: " << info->vertical_slides[i]->number_of_tags << std::endl;
-        while (j < info->number_of_vertical_slides)
+        while (j < info->vertical_slides[i]->number_of_tags)
             std::cout << " - " << info->vertical_slides[i]->tags[j++] << std::endl;
         std::cout << std::endl;
         ++i;

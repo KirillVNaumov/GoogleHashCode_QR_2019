@@ -19,7 +19,6 @@ void        create_vertical_slides(t_info *info)
     while (i < info->number_of_vertical_slides)
     {
         j = info->number_of_vertical_images - 1 - i - if_odd;
-
         info->vertical_slides[index] = (t_slide *)malloc(sizeof(t_slide));
         info->vertical_slides[index]->index_1 = info->vertical_images[i]->index;
         info->vertical_slides[index]->index_2 = info->vertical_images[j]->index;
@@ -31,7 +30,6 @@ void        create_vertical_slides(t_info *info)
         info->vertical_slides[index]->number_of_tags = list.size();
         info->vertical_slides[index]->tags = list_to_arr(list);
         ++index;
-
         ++i;
     }
     info->vertical_slides[index] = NULL;

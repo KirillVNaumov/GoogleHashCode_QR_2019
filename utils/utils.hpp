@@ -6,6 +6,7 @@
 #include <fstream>
 #include <list>
 #include <cmath>
+#include <algorithm>
 
 # define CRED       "\x1B[31m"
 
@@ -66,13 +67,19 @@ t_image             **sort_images(t_image **arr);
 
 bool                compare_nocase (long long first, long long second);
 bool                same_word (long long first, long long second);
+bool                number_of_tags_images (t_image *first, t_image *second);
+bool                number_of_tags_slides (t_slide *first, t_slide *second);
 
 /*
     Struct_operations
 */
 
-void                initialize_images(t_info *info);
-void                initialize_slides(t_info *info);
+void                        initialize_images(t_info *info);
+t_image                     **list_to_images(std::list<t_image *> list);
+std::list<t_image *>        image_to_list(t_image **arr);
+void                        initialize_slides(t_info *info);
+t_slide                     **list_to_slides(std::list<t_slide *> list);
+std::list<t_slide *>        slides_to_list(t_slide **arr);
 
 /*
     Printing
@@ -84,6 +91,6 @@ void                print_horizontal_slides(t_info *info);
 void                print_vertical_slides(t_info *info);
 void                print_output(t_info *info);
 void                print_input(t_info *info);
-
+void                print_answer(t_info *info);
 
 #endif

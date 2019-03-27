@@ -15,28 +15,41 @@ void        initialize_slides(t_info *info)
     info->output[i] = NULL;
 }
 
-t_slide     **sort_slides(t_slide **arr)
+std::list<t_slide *>        slides_to_list(t_slide **arr)
 {
     int     i;
-    int     if_sorted;
-    t_slide *tmp;
+    std::list<t_slide *> list;
 
-    if_sorted = 0;
-    while (!if_sorted)
-    {
-        i = 0;
-        if_sorted = 1;
-        while (arr[i + 1])
-        {
-            if (arr[i]->number_of_tags < arr[i + 1]->number_of_tags)
-            {
-                if_sorted = 0;
-                tmp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = tmp;
-            }
-            ++i;
-        }
-    }
+    i = 0;
+    while (arr[i])
+        list.push_back(arr[i++]);
+    return (list);
+}
+
+t_slide                     **list_to_slides(std::list<t_slide *> list)
+{
+    int     i;
+    int     length;
+    t_slide     **arr;
+
+    i = 0;
+
+    length = 0;
+    for (std::list<t_slide *>::iterator it=list.begin(); it!=list.end(); ++it)
+        ++length;
+    arr = (t_slide **)malloc(sizeof(t_slide *) * (length + 1));
+    for (std::list<t_slide *>::iterator it=list.begin(); it!=list.end(); ++it)
+        arr[i++] = *it;
+    arr[i] = NULL;
+    return (arr);
+}
+
+t_slide     **sort_slides(t_slide **arr)
+{
+    std::list<t_slide *>    list;
+
+    list = slides_to_list(arr);
+    list.sort(number_of_tags_slides);
+    arr = list_to_slides(list);
     return (arr);
 }

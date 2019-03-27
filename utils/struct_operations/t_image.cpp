@@ -15,30 +15,41 @@ void        initialize_images(t_info *info)
     info->input[i] = NULL;
 }
 
-t_image     **sort_images(t_image **arr)
+std::list<t_image *>        image_to_list(t_image **arr)
 {
     int     i;
-    int     if_sorted;
-    t_image  *tmp;
+    std::list<t_image *> list;
 
-    if_sorted = 0;
-    while (!if_sorted)
-    {
-        i = 0;
-        if_sorted = 1;
-        while (arr[i + 1])
-        {
-            if (arr[i]->number_of_tags < arr[i + 1]->number_of_tags)
-            {
-                std::cout << arr[i]->index << "[" << arr[i]->number_of_tags << \
-                "] and " << arr[i + 1]->index << "[" << arr[i + 1]->number_of_tags << "]" << std::endl;
-                if_sorted = 0;
-                tmp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = tmp;
-            }
-            ++i;
-        }
-    }
+    i = 0;
+    while (arr[i])
+        list.push_back(arr[i++]);
+    return (list);
+}
+
+t_image                     **list_to_images(std::list<t_image *> list)
+{
+    int     i;
+    int     length;
+    t_image     **arr;
+
+    i = 0;
+
+    length = 0;
+    for (std::list<t_image *>::iterator it=list.begin(); it!=list.end(); ++it)
+        ++length;
+    arr = (t_image **)malloc(sizeof(t_image *) * (length + 1));
+    for (std::list<t_image *>::iterator it=list.begin(); it!=list.end(); ++it)
+        arr[i++] = *it;
+    arr[i] = NULL;
+    return (arr);
+}
+
+t_image     **sort_images(t_image **arr)
+{
+    std::list<t_image *>    list;
+
+    list = image_to_list(arr);
+    list.sort(number_of_tags_images);
+    arr = list_to_images(list);
     return (arr);
 }

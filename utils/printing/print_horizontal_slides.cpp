@@ -13,7 +13,7 @@ void        print_horizontal_slides(t_info *info)
         std::cout << "Slide: " << info->horizontal_slides[i]->index_1;
         std::cout << std::endl;
         std::cout << "Number of Tags: " << info->horizontal_slides[i]->number_of_tags << std::endl;
-        while (j < info->number_of_horizontal_slides)
+        while (j < info->horizontal_slides[i]->number_of_tags)
             std::cout << " - " << info->horizontal_slides[i]->tags[j++] << std::endl;
         std::cout << std::endl;
         ++i;
