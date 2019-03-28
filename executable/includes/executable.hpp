@@ -8,6 +8,8 @@
 */
 
 void        create_output(t_info *info);
+void        final_sort_slides(t_info *info, std::list<t_slide *> list);
+void        initialize_output(t_info *info);
 
 /*
     Create_possible_slides
@@ -16,6 +18,7 @@ void        create_output(t_info *info);
 void        create_possible_slides(t_info *info);
 void        create_vertical_slides(t_info *info);
 void        create_horizontal_slides(t_info *info);
+
 /*
     Reading_input
 */

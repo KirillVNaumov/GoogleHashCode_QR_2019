@@ -29,6 +29,8 @@ UTILS = 	utils/utils_1.cpp \
 
 SRCS_EXEC = executable/srcs/main.cpp \
 			executable/srcs/create_output/create_output.cpp \
+			executable/srcs/create_output/final_sort_slides.cpp \
+			executable/srcs/create_output/initialize_output.cpp \
 			executable/srcs/create_possible_slides/create_possible_slides.cpp \
 			executable/srcs/create_possible_slides/create_vertical_slides.cpp \
 			executable/srcs/create_possible_slides/create_horizontal_slides.cpp \

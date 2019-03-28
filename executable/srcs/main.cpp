@@ -11,4 +11,4 @@ int         main()
     create_output(info);
     print_answer(info);
     return (0);
-}
+} 
