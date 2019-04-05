@@ -62,20 +62,16 @@ t_slide         *find_best_slide(t_slide *slide, std::list<t_slide *> list)
 
 void        final_sort_slides(t_info *info, std::list<t_slide *> list)
 {
-    // std::list<t_slide *>    new_list;
     std::list<t_slide *>::iterator it=list.begin();    
     t_slide                 *to_save;
 
     std::cout << info->number_of_slides << std::endl;
-    // new_list.push_back(*it);
     to_save = *it;
     list.remove(*it);
-
     std::cout << to_save->index_1;
     if (to_save->index_2 != -1)
         std::cout << " " << to_save->index_2;
     std::cout << std::endl;
-
     while (!list.empty())
     {
         to_save = find_best_slide(to_save, list);
@@ -84,9 +80,6 @@ void        final_sort_slides(t_info *info, std::list<t_slide *> list)
         if (to_save->index_2 != -1)
             std::cout << " " << to_save->index_2;
         std::cout << std::endl;
-
-        // new_list.push_back(to_save);
         list.remove(to_save);
     }
-    // info->output = list_to_slides(new_list);
 }

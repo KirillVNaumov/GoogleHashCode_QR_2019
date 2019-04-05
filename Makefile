@@ -14,13 +14,11 @@ INCLUDES_EXEC = -I executable/includes
 INCLUDES_CHECKER = -I checker/includes
 INCLUDES_UTILS = -I utils
 
-TESTS =		tests/a_example.txt 
-			# tests/b_lovely_landscapes.txt 
-			# tests/c_memorable_moments.txt 
-			# tests/d_pet_pictures.txt 
-			# tests/e_shiny_selfies.txt
-
-OUTPUT = 	$(TESTS:%=%)
+TESTS =		inputs/a_example.txt \
+			inputs/b_lovely_landscapes.txt \
+			inputs/c_memorable_moments.txt \
+			inputs/d_pet_pictures.txt \
+			inputs/e_shiny_selfies.txt
 
 UTILS = 	utils/utils_1.cpp \
 			utils/bools.cpp \
@@ -77,9 +75,14 @@ RED_EXTRA = \033[1;31m
 GREEN_EXTRA = \033[1;32m
 BLUE_EXTRA = \033[1;36m
 
+%.out:%.txt
+	@echo "$(GREEN)Making output for $(GREEN_EXTRA)$<$(RESET)"
+	@./exe < $< > $@
+	@./check $< < $@ >> inputs/total_score
+
 %.o:%.cpp
-			@echo "$(GREEN) - Creating $(GREEN_EXTRA)$<...$(RESET)"
-			@clang++ -c $< -o $@ $(INCLUDES_EXEC) $(INCLUDES_CHECKER) $(INCLUDES_UTILS) -g
+	@echo "$(GREEN) - Creating $(GREEN_EXTRA)$<...$(RESET)"
+	@clang++ -c $< -o $@ $(INCLUDES_EXEC) $(INCLUDES_CHECKER) $(INCLUDES_UTILS) -g
 
 all: $(OBJ_UTILS) $(EXEC) $(CHECKER)
 
@@ -121,10 +124,17 @@ fclean: clean
 
 re: fclean all
 
-%: %
-	@echo "$(GREEN)Making output for $(GREEN_EXTRA)$<"
-	@./exe < $< > $@.out
+output: $(OBJ_UTILS) $(EXEC) $(CHECKER) $(TESTS:.txt=.out)
+	@echo "$(GREEN)Moving $(GREEN_EXTRA)*.out $(GREEN)to $(GREEN_EXTRA)outputs$(RESET)"
+	@mv inputs/*.out outputs
+	@clang++ inputs/eval.cpp -o inputs/eval -I utils $(OBJ_UTILS)
+	@echo "$(GREEN)Making final evaluation...$(GREEN_EXTRA)"
+	@inputs/eval
+	@/bin/rm -f inputs/eval
+	@if [ -a "inputs/total_score" ]; then \
+	/bin/rm -f inputs/total_score; \
+	fi
 
-output: $(TESTS)
+eval:
 
-.PHONY: clean fclean re
+.PHONY: output clean fclean re
