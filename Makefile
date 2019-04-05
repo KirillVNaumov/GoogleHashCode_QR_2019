@@ -14,10 +14,19 @@ INCLUDES_EXEC = -I executable/includes
 INCLUDES_CHECKER = -I checker/includes
 INCLUDES_UTILS = -I utils
 
+TESTS =		tests/a_example.txt 
+			# tests/b_lovely_landscapes.txt 
+			# tests/c_memorable_moments.txt 
+			# tests/d_pet_pictures.txt 
+			# tests/e_shiny_selfies.txt
+
+OUTPUT = 	$(TESTS:%=%)
+
 UTILS = 	utils/utils_1.cpp \
-			utils/utils_bool.cpp \
+			utils/bools.cpp \
 			utils/from_string_to_num.cpp \
 			utils/printing/print_input.cpp \
+			utils/printing/print_list.cpp \
 			utils/printing/print_output.cpp \
 			utils/printing/print_answer.cpp \
 			utils/printing/print_horizontal_images.cpp \
@@ -30,7 +39,6 @@ UTILS = 	utils/utils_1.cpp \
 SRCS_EXEC = executable/srcs/main.cpp \
 			executable/srcs/create_output/create_output.cpp \
 			executable/srcs/create_output/final_sort_slides.cpp \
-			executable/srcs/create_output/initialize_output.cpp \
 			executable/srcs/create_possible_slides/create_possible_slides.cpp \
 			executable/srcs/create_possible_slides/create_vertical_slides.cpp \
 			executable/srcs/create_possible_slides/create_horizontal_slides.cpp \
@@ -112,5 +120,11 @@ fclean: clean
 	@echo "$(BLUE_EXTRA)fclean$(BLUE): Complete$(RESET)"
 
 re: fclean all
+
+%: %
+	@echo "$(GREEN)Making output for $(GREEN_EXTRA)$<"
+	@./exe < $< > $@.out
+
+output: $(TESTS)
 
 .PHONY: clean fclean re

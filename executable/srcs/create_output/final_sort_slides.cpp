@@ -2,35 +2,50 @@
 
 int             find_common_tags(t_slide *first, t_slide *second)
 {
-    std::list<long long>   list_1 = arr_to_list(first->tags, first->number_of_tags);
-    std::list<long long>   list_2 = arr_to_list(second->tags, second->number_of_tags);    
-    std::list<long long>::const_iterator i1 = list_1.begin();
-    std::list<long long>::const_iterator i2 = list_2.begin();
     int     score;
+    int     index_1;
+    int     index_2;
 
     score = 0;
-    while(i1 != list_1.end() && i2 != list_2.end()){
-        if(*i1 == *i2)
+    index_1 = 0;
+    index_2 = 0;
+    while(index_1 < first->number_of_tags && index_2 < second->number_of_tags)
+    {
+        if(first->tags[index_1] == second->tags[index_2])
         {
             ++score;
-            ++i1;
-            ++i2;
+            ++index_1;
+            ++index_2;
         }
-        else if (*i1 > 0)
-            ++i2;
+        else if (first->tags[index_1] > second->tags[index_2])
+            ++index_2;
         else
-            ++i1;
+            ++index_1;
     }   
     return (score);
 }
 
-std::list<t_slide *>::iterator        find_best_slide(t_slide *slide, std::list<t_slide *> list)
+int             optimization_formula(t_slide *first, t_slide *second, int score)
+{
+    t_slide     *minimum_slide;
+
+    if (first->number_of_tags < second->number_of_tags)
+        minimum_slide = first;
+    else
+        minimum_slide = second;
+    if (minimum_slide->number_of_tags / 2 == score)
+        return (1);
+    return (0);
+}
+
+t_slide         *find_best_slide(t_slide *slide, std::list<t_slide *> list)
 {
     std::list<t_slide *>::iterator  best_slide;
     int                             best_score;
     int                             current_score;
 
     best_score = 0;
+    best_slide = list.begin();
     for (std::list<t_slide *>::iterator it=list.begin(); it!=list.end(); ++it)
     {
         current_score = find_common_tags(slide, *it);
@@ -38,30 +53,40 @@ std::list<t_slide *>::iterator        find_best_slide(t_slide *slide, std::list<
         {
             best_score = current_score;
             best_slide = it;
+            if (optimization_formula(slide, *it, best_score) == 1)
+                return (*best_slide);
         }
     }
-    if (best_score == 0)
-        return (list.begin());
-    return (best_slide);
+    return (*best_slide);
 }
 
 void        final_sort_slides(t_info *info, std::list<t_slide *> list)
 {
-    int     index;
-    std::list<t_slide *>::iterator it=list.begin();
+    // std::list<t_slide *>    new_list;
+    std::list<t_slide *>::iterator it=list.begin();    
+    t_slide                 *to_save;
 
-    index = 0;
-    info->output[index] = *it;
-    std::cout << "1";
+    std::cout << info->number_of_slides << std::endl;
+    // new_list.push_back(*it);
+    to_save = *it;
     list.remove(*it);
-    std::cout << "2";
+
+    std::cout << to_save->index_1;
+    if (to_save->index_2 != -1)
+        std::cout << " " << to_save->index_2;
+    std::cout << std::endl;
+
     while (!list.empty())
     {
-        it = find_best_slide(info->output[index], list);
-        ++index;
-        info->output[index] = *it;
-        list.remove(*it);
+        to_save = find_best_slide(to_save, list);
+
+        std::cout << to_save->index_1;
+        if (to_save->index_2 != -1)
+            std::cout << " " << to_save->index_2;
+        std::cout << std::endl;
+
+        // new_list.push_back(to_save);
+        list.remove(to_save);
     }
-    ++index;
-    info->output[index] = NULL;
+    // info->output = list_to_slides(new_list);
 }

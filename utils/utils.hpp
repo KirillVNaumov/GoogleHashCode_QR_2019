@@ -92,5 +92,6 @@ void                print_vertical_slides(t_info *info);
 void                print_output(t_info *info);
 void                print_input(t_info *info);
 void                print_answer(t_info *info);
+void                print_list_slides(std::list<t_slide *> list);
 
 #endif

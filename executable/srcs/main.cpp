@@ -9,6 +9,6 @@ int         main()
     separate_vertical_and_horizontal(info);
     create_possible_slides(info);
     create_output(info);
-    print_answer(info);
+    // print_answer(info);
     return (0);
 } 
